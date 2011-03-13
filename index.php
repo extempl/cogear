@@ -101,6 +101,7 @@ function autoload($class) {
 // Register with autoload
 spl_autoload_register('autoload');
 
+try {
 $cogear = Cogear::getInstance();
 // Some gears are needed to be preloaded
 $cogear->request = new Request();
@@ -148,3 +149,6 @@ $cogear->loadGears();
 $cogear->event('ignite');
 $cogear->event('done');
 $cogear->response->send();
+} catch (Exception $e) {
+  Message::error($e->getMessage());
+}

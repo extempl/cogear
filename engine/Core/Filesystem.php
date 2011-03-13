@@ -112,7 +112,8 @@ class Filesystem {
      * @param boolean $recursive
      */
     public static function makeDir($dir, $perms = 0777, $recursive = TRUE) {
-        is_dir($dir) OR $dir && mkdir($dir, $perms, $recursive);
+        if(!(is_dir($dir) OR $dir && @mkdir($dir, $perms, $recursive)))
+          throw new Exception("Can't create directory ".$dir);
     }
 
 }
